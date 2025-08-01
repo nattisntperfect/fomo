@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mas Fomo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top left, #ffe0f0, #d4f1f9);
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .message {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      color: #ff69b4;
+      z-index: 10;
+      padding: 0 20px;
+      text-shadow: 2px 2px #fff;
+      animation: floatText 3s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    #cat-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      background: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') no-repeat center/contain;
+      cursor: pointer;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+      background-color: #fff5fa;
+    }
+
+    #cat-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #ff69b4;
+      transform: rotate(45deg);
+      animation: floatHeart 2s ease-in-out infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        bottom: 0;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100px;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="message">Happy Dede Girlfriend Day! Dedee purr-fect!🐾</div>
+  <div id="cat-container"></div>
+  <audio id="meowSound" src="https://www.soundjay.com/cat/cat-meow-2.mp3" preload="auto"></audio>
+
+  <script>
+    const cat = document.getElementById('cat-container');
+    const audio = document.getElementById('meowSound');
+
+    cat.addEventListener('click', () => {
+      audio.currentTime = 0;
+      audio.play();
+      cat.style.transform = 'scale(1.1)';
+
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 200 + 'px';
+      heart.style.bottom = '10px';
+      heart.style.position = 'absolute';
+      cat.appendChild(heart);
+
+      setTimeout(() => {
+        cat.style.transform = 'scale(1)';
+        heart.remove();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
